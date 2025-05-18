@@ -2,8 +2,8 @@ import './style.css';
 import io from 'socket.io-client';
 import { Message } from './Message.jsx';
 import { useEffect, useState } from 'react';
-const socket = io.connect("http://localhost:3001");
-//const socket = io.connect("https://ripcord-63sq.onrender.com");
+//const socket = io.connect("http://localhost:3001");
+const socket = io.connect("https://ripcord-63sq.onrender.com");
 
 function App() {
   
