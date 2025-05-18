@@ -24,6 +24,7 @@ const pfps = [
   "/pfp/pink flower.png",
   "/pfp/red flower.png",
   "/pfp/skater.png",
+    "/pfp/yukko3.png",
   "/pfp/snowflake.png",
     "/pfp/chikawa1.jpg",
   "/pfp/chikawa2.jpg",
