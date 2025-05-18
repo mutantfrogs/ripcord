@@ -1,6 +1,6 @@
 import './style.css';
 import io from 'socket.io-client';
-import { Message } from './message';
+import { Message } from './Message.jsx';
 import { useEffect, useState } from 'react';
 const socket = io.connect("http://localhost:3001");
 
