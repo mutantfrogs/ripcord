@@ -2,7 +2,7 @@ import './style.css';
 import io from 'socket.io-client';
 import { Message } from './Message.jsx';
 import { useEffect, useState } from 'react';
-const socket = io.connect(process.env.SERVERURL);
+const socket = io.connect(process.env.REACT_APP_SERVERURL);
 
 function App() {
   
