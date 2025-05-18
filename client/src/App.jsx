@@ -2,7 +2,8 @@ import './style.css';
 import io from 'socket.io-client';
 import { Message } from './Message.jsx';
 import { useEffect, useState } from 'react';
-const socket = io.connect("https://ripcord-63sq.onrender.com");
+const socket = io.connect("http://localhost:3001");
+//const socket = io.connect("https://ripcord-63sq.onrender.com");
 
 function App() {
   
@@ -11,8 +12,9 @@ function App() {
   const [color, setColor] = useState("");
   const [feed, setFeed] = useState([]);
   const [pfp, setPfp] = useState("");
-  const [lobby, setLobby] = useState("");
+  const [lobby, setLobby] = useState("#room1");
   const [settingsDiv, setsettingsDiv] = useState(false);
+  const [members, setMembers] = useState([]);
 
   const sendMessage = (e) => {
     e.preventDefault();
@@ -31,7 +33,6 @@ function App() {
     }
 
     if(settingsDiv == true){
-      setLobby("");
       setsettingsDiv(false);
       setFeed([]);
       return;
@@ -88,13 +89,15 @@ function App() {
           </form>
           <div id='lobbyDiv' className='flexContainerRow'>
           <form onSubmit={e => joinLobby(e)}>
-              <label style={{fontSize: '12px'}}>lobby</label>
-              <input disabled={settingsDiv} style={{height: '12px'}} required id='taskbarLobbyInput' type='text' value={lobby} onChange={e => setLobby(e.target.value)}></input>
-              <label style={{fontSize: '12px'}}>username</label>
-              <input disabled={settingsDiv} style={{height: '12px'}} required id='taskbarUsernameInput' type='text' value={username} onChange={e => setUsername(e.target.value)}></input>
+              <select disabled={settingsDiv} size="1" value={lobby} onChange={e => setLobby(e.target.value)}>
+                <option value="#room1">#room1</option>
+                <option value="#room2">#room2</option>
+                <option value="#room3">#room3</option>
+              </select>
+              <input placeholder='Username' disabled={settingsDiv} style={{height: '12px'}} required id='taskbarUsernameInput' type='text' value={username} onChange={e => setUsername(e.target.value)}></input>
               <input disabled={settingsDiv} type='color' value={color} onChange={e => setColor(e.target.value)}></input>
               <select disabled={settingsDiv} id="cars" name="cars" size="1" onChange={e => setPfp(e.target.value)}>
-                  <option value="">Profile Picture</option>
+                  <option value="">Choose a Profile Picture</option>
                   <option value="/airplane.png">Airplane</option>
                   <option value="/astronaut.png">Astronaut</option>
                   <option value="/ball.png">Ball</option>
@@ -120,7 +123,7 @@ function App() {
                   <option value="/skater.png">Skater</option>
                   <option value="/snowflake.png">Snowflake</option>
                 </select>
-                <button type='submit'>{settingsDiv ? "Leave" : "Join"}</button>
+                <button type='submit'>{settingsDiv ? "leave" : "join"}</button>
               </form> 
           </div>
         </div>
