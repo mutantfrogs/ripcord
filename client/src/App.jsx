@@ -2,6 +2,7 @@ import './style.css';
 import io from 'socket.io-client';
 import { Message } from './Message.jsx';
 import { useEffect, useState } from 'react';
+import { ProfilePicture } from './ProfilePicture.jsx';
 //const socket = io.connect("http://localhost:3001");
 const socket = io.connect("https://ripcord-63sq.onrender.com");
 
@@ -12,9 +13,9 @@ function App() {
   const [color, setColor] = useState(() => localStorage.getItem('color') || '');
   const [feed, setFeed] = useState([]);
   const [pfp, setPfp] = useState(() => localStorage.getItem('pfp') || '');
+  const [pfpSelectorOpen, setPfpSelectorOpen] = useState(false);
   const [lobby, setLobby] = useState("#room1");
   const [settingsDiv, setsettingsDiv] = useState(false);
-  const [members, setMembers] = useState([]);
 
   const sendMessage = (e) => {
     e.preventDefault();
@@ -83,6 +84,9 @@ function App() {
 
   return (
     <>
+    {pfpSelectorOpen && (
+      <ProfilePicture setPfp={setPfp} setPfpSelectorOpen={setPfpSelectorOpen}/>
+    )}
       <div className='flexContainerColumn'>
         <div id='feedDiv'>
           {renderMessageFeed()}
@@ -102,33 +106,7 @@ function App() {
               </select>
               <input placeholder='Username' disabled={settingsDiv} style={{height: '12px'}} required id='taskbarUsernameInput' type='text' value={username} onChange={e => setUsername(e.target.value)}></input>
               <input disabled={settingsDiv} type='color' value={color} onChange={e => setColor(e.target.value)}></input>
-                <select disabled={settingsDiv} value={pfp} size="1" onChange={e => setPfp(e.target.value)}>
-                  <option value="">Choose a Profile Picture</option>
-                  <option value="/pfp/airplane.png">Airplane</option>
-                  <option value="/pfp/astronaut.png">Astronaut</option>
-                  <option value="/pfp/ball.png">Ball</option>
-                  <option value="/pfp/beach.png">Beach</option>
-                  <option value="/pfp/butterfly.png">Butterfly</option>
-                  <option value="/pfp/car.png">Car</option>
-                  <option value="/pfp/cat.png">Cat</option>
-                  <option value="/pfp/chess.png">Chess</option>
-                  <option value="/pfp/dirt bike.png">Dirt Bike</option>
-                  <option value="/pfp/dog.png">Dog</option>
-                  <option value="/pfp/drip.png">Drip</option>
-                  <option value="/pfp/duck.png">Duck</option>
-                  <option value="/pfp/fish.png">Fish</option>
-                  <option value="/pfp/frog.png">Frog</option>
-                  <option value="/pfp/guest.png">Guest</option>
-                  <option value="/pfp/guitar.png">Guitar</option>
-                  <option value="/pfp/horses.png">Horses</option>
-                  <option value="/pfp/kick.png">Kick</option>
-                  <option value="/pfp/lift off.png">Lift Off</option>
-                  <option value="/pfp/palm tree.png">Palm Tree</option>
-                  <option value="/pfp/pink flower.png">Pink Flower</option>
-                  <option value="/pfp/red flower.png">Red Flower</option>
-                  <option value="/pfp/skater.png">Skater</option>
-                  <option value="/pfp/snowflake.png">Snowflake</option>
-                </select>
+                <button disabled={settingsDiv} type="button" onClick={() => setPfpSelectorOpen(!pfpSelectorOpen)}>Select Profile Picture</button>
                 <button type='submit'>{settingsDiv ? "leave" : "join"}</button>
               </form> 
           </div>
