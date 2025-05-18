@@ -11,8 +11,9 @@ const server = http.createServer(app);
 
 const io = new Server(server,{
     cors:{
-        origin: process.env.CLIENTURL,
+        origin: "https://ripcord-client.onrender.com",
         methods: ["GET", "POST"],
+        credentials: true,
     },
 });
 

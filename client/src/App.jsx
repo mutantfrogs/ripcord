@@ -2,7 +2,7 @@ import './style.css';
 import io from 'socket.io-client';
 import { Message } from './Message.jsx';
 import { useEffect, useState } from 'react';
-const socket = io.connect(process.env.REACT_APP_SERVERURL);
+const socket = io.connect("https://ripcord-63sq.onrender.com");
 
 function App() {
   
@@ -38,6 +38,7 @@ function App() {
     }
 
     const user = socket.id;
+    console.log(socket.id);
     const messageData = {lobby: lobby, message: message, user: user, username: username, color: color, pfp: pfp};
     setsettingsDiv(true)
     socket.emit("joinClientToServer", messageData);
