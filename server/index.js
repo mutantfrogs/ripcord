@@ -10,8 +10,8 @@ const server = http.createServer(app);
 
 const io = new Server(server,{
     cors:{
-        //origin: "http://localhost:5174",
-        origin: "https://ripcord-client.onrender.com",
+        origin: "http://localhost:5174",
+        //origin: "https://ripcord-client.onrender.com",
         methods: ["GET", "POST"],
     },
 });
@@ -19,7 +19,7 @@ const io = new Server(server,{
 io.on("connection", (socket) => {
     socket.on("joinClientToServer", (data) => {
         const timestamp = Date.now();
-        const newData1 = {message: data.username + " has joined " + data.lobby + "!", user: data.user, timestamp: timestamp, username: "Server", color: 'white', pfp: "/yukko3.png"};
+        const newData1 = {message: data.username + " has joined " + data.lobby + "!", user: data.user, timestamp: timestamp, username: "Server", color: 'white', pfp: "/pfp/yukko3.png"};
         socket.join(data.lobby);
         io.to(data.lobby).emit("joinClientToLobby", (newData1));
     })

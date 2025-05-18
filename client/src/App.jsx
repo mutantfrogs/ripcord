@@ -2,16 +2,16 @@ import './style.css';
 import io from 'socket.io-client';
 import { Message } from './Message.jsx';
 import { useEffect, useState } from 'react';
-//const socket = io.connect("http://localhost:3001");
-const socket = io.connect("https://ripcord-63sq.onrender.com");
+const socket = io.connect("http://localhost:3001");
+//const socket = io.connect("https://ripcord-63sq.onrender.com");
 
 function App() {
   
   const [message, setMessage] = useState("");
-  const [username, setUsername] = useState("");
-  const [color, setColor] = useState("");
+  const [username, setUsername] = useState(() => localStorage.getItem('username') || '');
+  const [color, setColor] = useState(() => localStorage.getItem('color') || '');
   const [feed, setFeed] = useState([]);
-  const [pfp, setPfp] = useState("");
+  const [pfp, setPfp] = useState(() => localStorage.getItem('pfp') || '');
   const [lobby, setLobby] = useState("#room1");
   const [settingsDiv, setsettingsDiv] = useState(false);
   const [members, setMembers] = useState([]);
@@ -45,6 +45,12 @@ function App() {
     socket.emit("joinClientToServer", messageData);
   }
 
+    useEffect(() => {
+      localStorage.setItem('username', username);
+      localStorage.setItem('color', color);
+      localStorage.setItem('pfp', pfp);
+    }, [username, color, pfp]);
+    
   useEffect(() => {
     const handleMessage = (fullMessage) => {
       setFeed(prevFeed => [...prevFeed, fullMessage]);
@@ -96,32 +102,32 @@ function App() {
               </select>
               <input placeholder='Username' disabled={settingsDiv} style={{height: '12px'}} required id='taskbarUsernameInput' type='text' value={username} onChange={e => setUsername(e.target.value)}></input>
               <input disabled={settingsDiv} type='color' value={color} onChange={e => setColor(e.target.value)}></input>
-              <select disabled={settingsDiv} id="cars" name="cars" size="1" onChange={e => setPfp(e.target.value)}>
+                <select disabled={settingsDiv} value={pfp} size="1" onChange={e => setPfp(e.target.value)}>
                   <option value="">Choose a Profile Picture</option>
-                  <option value="/airplane.png">Airplane</option>
-                  <option value="/astronaut.png">Astronaut</option>
-                  <option value="/ball.png">Ball</option>
-                  <option value="/beach.png">Beach</option>
-                  <option value="/butterfly.png">Butterfly</option>
-                  <option value="/car.png">Car</option>
-                  <option value="/cat.png">Cat</option>
-                  <option value="/chess.png">Chess</option>
-                  <option value="/dirt bike.png">Dirt Bike</option>
-                  <option value="/dog.png">Dog</option>
-                  <option value="/drip.png">Drip</option>
-                  <option value="/duck.png">Duck</option>
-                  <option value="/fish.png">Fish</option>
-                  <option value="/frog.png">Frog</option>
-                  <option value="/guest.png">Guest</option>
-                  <option value="/guitar.png">Guitar</option>
-                  <option value="/horses.png">Horses</option>
-                  <option value="/kick.png">Kick</option>
-                  <option value="/lift off.png">Lift Off</option>
-                  <option value="/palm tree.png">Palm Tree</option>
-                  <option value="/pink flower.png">Pink Flower</option>
-                  <option value="/red flower.png">Red Flower</option>
-                  <option value="/skater.png">Skater</option>
-                  <option value="/snowflake.png">Snowflake</option>
+                  <option value="/pfp/airplane.png">Airplane</option>
+                  <option value="/pfp/astronaut.png">Astronaut</option>
+                  <option value="/pfp/ball.png">Ball</option>
+                  <option value="/pfp/beach.png">Beach</option>
+                  <option value="/pfp/butterfly.png">Butterfly</option>
+                  <option value="/pfp/car.png">Car</option>
+                  <option value="/pfp/cat.png">Cat</option>
+                  <option value="/pfp/chess.png">Chess</option>
+                  <option value="/pfp/dirt bike.png">Dirt Bike</option>
+                  <option value="/pfp/dog.png">Dog</option>
+                  <option value="/pfp/drip.png">Drip</option>
+                  <option value="/pfp/duck.png">Duck</option>
+                  <option value="/pfp/fish.png">Fish</option>
+                  <option value="/pfp/frog.png">Frog</option>
+                  <option value="/pfp/guest.png">Guest</option>
+                  <option value="/pfp/guitar.png">Guitar</option>
+                  <option value="/pfp/horses.png">Horses</option>
+                  <option value="/pfp/kick.png">Kick</option>
+                  <option value="/pfp/lift off.png">Lift Off</option>
+                  <option value="/pfp/palm tree.png">Palm Tree</option>
+                  <option value="/pfp/pink flower.png">Pink Flower</option>
+                  <option value="/pfp/red flower.png">Red Flower</option>
+                  <option value="/pfp/skater.png">Skater</option>
+                  <option value="/pfp/snowflake.png">Snowflake</option>
                 </select>
                 <button type='submit'>{settingsDiv ? "leave" : "join"}</button>
               </form> 
