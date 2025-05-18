@@ -1,0 +1,86 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+     background-color: #323339;
+}
+
+#taskbarDiv{
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    background-color: #393a41;
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+#taskbarLobbyInput{
+    width: 30px;
+}
+
+#feedDiv{
+    height: 800px;
+    width: 800px;
+    overflow: scroll;
+    align-items: left;
+}
+
+#taskbarMessageInput{
+    width: 600px;
+    margin: 5px;
+}
+
+#taskbarInput{
+    width: 800px;
+    margin: 5px;
+}
+
+#profilePicture{
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    margin-right: 10px;
+}
+
+#msgTimestamp{
+    margin-left: 2px;
+    color: #92939b;
+    font-size: 10px;
+}
+
+#msgUsername{
+    margin: 5px;
+    margin-left: 0px;
+}
+
+#msgContent{
+    color: white;
+    margin: 0;
+}
+
+.flexContainerRow{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.flexContainerColumn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.flexContainerColumnNoCenter {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.flexContainerRowNoCenter{
+    display: flex;
+    flex-wrap: wrap;
+}
