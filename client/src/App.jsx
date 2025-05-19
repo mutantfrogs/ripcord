@@ -78,7 +78,7 @@ function App() {
 
   const renderMessageFeed = () => {
     return feed.map(item => (
-      <Message message={item.message} username={item.username} timestamp={item.timestamp} color={item.color} pfp={item.pfp}/>
+      <Message message={item.message} username={item.username} timestamp={item.timestamp} color={item.color} pfp={item.pfp} modifier={item.modifier}/>
     ))
   }
 

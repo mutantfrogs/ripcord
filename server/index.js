@@ -19,14 +19,28 @@ const io = new Server(server,{
 io.on("connection", (socket) => {
     socket.on("joinClientToServer", (data) => {
         const timestamp = Date.now();
-        const newData1 = {message: data.username + " has joined " + data.lobby + "!", user: data.user, timestamp: timestamp, username: "Server", color: 'white', pfp: "/pfp/yukko3.png"};
+        const newData1 = {message: data.username + " has joined " + data.lobby + "!", user: data.user, timestamp: timestamp, username: "Server", color: 'white', pfp: ""};
         socket.join(data.lobby);
         io.to(data.lobby).emit("joinClientToLobby", (newData1));
     })
     
     socket.on("sendMsgToServer", (data) => {
+        let parsedMessage = data.message;
+        let modifier = "";
+        if(data.message.startsWith("/r")){
+            parsedMessage = data.message.slice(2);
+            modifier = 'rainbow-text';
+        }
+        if(data.message.startsWith("/b")){
+            parsedMessage = data.message.slice(2);
+            modifier = 'bold';
+        }
+         if(data.message.startsWith("/i")){
+            parsedMessage = data.message.slice(2);
+            modifier = 'italic';
+        }
         const timestamp = Date.now();
-        const newData = {lobby: data.lobby, message: data.message, user: data.user, timestamp: timestamp, username: data.username, color: data.color, pfp: data.pfp}; 
+        const newData = {lobby: data.lobby, message: parsedMessage, user: data.user, timestamp: timestamp, username: data.username, color: data.color, pfp: data.pfp, modifier: modifier}; 
         io.to(data.lobby).emit("sendMsgToClient", (newData));
     })
 });

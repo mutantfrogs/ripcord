@@ -69,6 +69,32 @@ body{
     margin: 0;
 }
 
+.rainbow-text {
+  animation: rainbowAnimation 2s linear infinite;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.italic{
+    font-style: italic;
+}
+
+@keyframes rainbowAnimation {
+  0%   { color: red; }
+  10%  { color: rgb(255, 115, 0); }
+  20%  { color: yellow; }
+  30%  { color: rgb(102, 255, 0); }
+  40%  { color: rgb(0, 255, 106); }
+  50%  { color: rgb(0, 247, 255); }
+  60%  { color: rgb(0, 81, 255); }
+  70%  { color: rgb(17, 0, 255); }
+  80%  { color: rgb(162, 0, 255); }
+  90%  { color: rgb(255, 0, 191); }
+  100% { color: rgb(255, 0, 55); }
+}
+
 .flexContainerRow{
     display: flex;
     justify-content: center;
